@@ -1,0 +1,160 @@
+[gd_scene load_steps=17 format=3 uid="uid://dtuqyjahx4fyo"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_pdahv"]
+[ext_resource type="Texture2D" uid="uid://d41117ea1x7c" path="res://Assets/Textures/PH-Crosshair.png" id="2_jcm5a"]
+[ext_resource type="Script" path="res://Scripts/CameraShake.gd" id="2_q3nu7"]
+[ext_resource type="AudioStream" uid="uid://draqeayn8kgyr" path="res://Assets/SFX/PHDamage.wav" id="4_efm7x"]
+[ext_resource type="AudioStream" uid="uid://bges7aspjjldj" path="res://Assets/SFX/PHFall.wav" id="5_ldmsd"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jna7x"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oxnh1"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rlnsr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qocm7"]
+bg_color = Color(0.152941, 0.152941, 0.329412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ygcf"]
+bg_color = Color(0.6, 0.627451, 1, 1)
+
+[sub_resource type="Theme" id="Theme_y0si2"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_qocm7")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_5ygcf")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g8t1l"]
+bg_color = Color(0.219608, 0.0980392, 0.0980392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iupsg"]
+bg_color = Color(0.768627, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_rwil3"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_g8t1l")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_iupsg")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ca2u2"]
+font_size = 32
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g1uqb"]
+radius = 0.586947
+height = 2.22535
+
+[node name="PlayerCharacter" type="CharacterBody3D" groups=["Player", "Sorceress"]]
+script = ExtResource("1_pdahv")
+
+[node name="PlayerMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_jna7x")
+
+[node name="PlayerCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_oxnh1")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53033, 0)
+
+[node name="PlayerCamera" type="Camera3D" parent="Head"]
+script = ExtResource("2_q3nu7")
+noise = SubResource("FastNoiseLite_rlnsr")
+
+[node name="HeadsUpDisplay" type="Control" parent="Head/PlayerCamera"]
+top_level = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="TextureRect" type="TextureRect" parent="Head/PlayerCamera/HeadsUpDisplay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = -39.0
+offset_right = 39.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_jcm5a")
+expand_mode = 1
+
+[node name="DashCDBar" type="ProgressBar" parent="Head/PlayerCamera/HeadsUpDisplay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 39.9999
+offset_top = -29.0001
+offset_right = 277.0
+offset_bottom = -2.00006
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.0399998, 2.2)
+theme = SubResource("Theme_y0si2")
+fill_mode = 2
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="Head/PlayerCamera/HeadsUpDisplay"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 21.0
+offset_right = 264.0
+offset_bottom = 48.0
+scale = Vector2(1.96, 2.56)
+theme = SubResource("Theme_rwil3")
+max_value = 10.0
+show_percentage = false
+
+[node name="AbilityTimerBar" type="ProgressBar" parent="Head/PlayerCamera/HeadsUpDisplay"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 99.0
+offset_right = 492.0
+offset_bottom = 126.0
+max_value = 200.0
+
+[node name="SpellSlotDisp" type="Label" parent="Head/PlayerCamera/HeadsUpDisplay"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 134.0
+offset_right = 79.0
+offset_bottom = 186.0
+text = "1"
+label_settings = SubResource("LabelSettings_ca2u2")
+
+[node name="AimCast" type="RayCast3D" parent="Head"]
+target_position = Vector3(0, 0, -1.5)
+
+[node name="ProjectileSpawn" type="Node3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.552196, -0.0637002, -1.04124)
+
+[node name="IfFloor" type="RayCast3D" parent="."]
+target_position = Vector3(0, -0.5, 0)
+
+[node name="DamageCollider" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 3
+collision_mask = 3
+
+[node name="DCCollisionShape" type="CollisionShape3D" parent="DamageCollider"]
+shape = SubResource("CapsuleShape3D_g1uqb")
+
+[node name="DamageTimer" type="Timer" parent="."]
+
+[node name="AudioContainer" type="Node3D" parent="."]
+
+[node name="SFXDamage" type="AudioStreamPlayer" parent="AudioContainer"]
+stream = ExtResource("4_efm7x")
+
+[node name="SFXFall" type="AudioStreamPlayer" parent="AudioContainer"]
+stream = ExtResource("5_ldmsd")
+
+[node name="SFXJump" type="AudioStreamPlayer" parent="AudioContainer"]
+
+[connection signal="body_entered" from="DamageCollider" to="." method="_on_dmg_collider_body_entered"]
+[connection signal="body_exited" from="DamageCollider" to="." method="_on_damage_collider_body_exited"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]

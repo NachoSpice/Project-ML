@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bfoiaw8cokum0"
+path="res://.godot/imported/PHStaff.obj-e3d35614bbe96727722b4c8825e46665.mesh"
+
+[deps]
+
+files=["res://.godot/imported/PHStaff.obj-e3d35614bbe96727722b4c8825e46665.mesh"]
+
+source_file="res://Assets/Models/PHStaff.obj"
+dest_files=["res://.godot/imported/PHStaff.obj-e3d35614bbe96727722b4c8825e46665.mesh", "res://.godot/imported/PHStaff.obj-e3d35614bbe96727722b4c8825e46665.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

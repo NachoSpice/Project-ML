@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://fcrmcbqjaulj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_13tg7"]
+albedo_color = Color(0.694118, 0.0705882, 0.901961, 1)
+emission_enabled = true
+emission = Color(0.290196, 0.121569, 0.243137, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_x5jbp"]
+material = SubResource("StandardMaterial3D_13tg7")
+radial_segments = 8
+rings = 4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qqae0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rdabo"]
+radius = 0.64874
+
+[node name="PlayerBomb" type="RigidBody3D"]
+gravity_scale = 0.5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_x5jbp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_qqae0")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_rdabo")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

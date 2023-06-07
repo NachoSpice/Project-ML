@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://ctwfqg0178w0j"]
+
+[ext_resource type="Script" path="res://Scripts/exupurosion.gd" id="1_acf5k"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ikxu5"]
+radius = 3.0
+
+[sub_resource type="Gradient" id="Gradient_or05s"]
+colors = PackedColorArray(0.574933, 0.154, 0.77, 1, 0.313726, 0, 0.662745, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2kaqi"]
+gradient = SubResource("Gradient_or05s")
+
+[sub_resource type="Curve" id="Curve_i616x"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_05qd4"]
+curve = SubResource("Curve_i616x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ngpg6"]
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector3(1, 1, 1)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.2
+initial_velocity_max = 0.5
+color_ramp = SubResource("GradientTexture1D_2kaqi")
+hue_variation_curve = SubResource("CurveTexture_05qd4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m7anc"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_5db4x"]
+material = SubResource("StandardMaterial3D_m7anc")
+
+[node name="Exupurosion" type="Node3D"]
+script = ExtResource("1_acf5k")
+
+[node name="ExpRadius" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExpRadius"]
+shape = SubResource("SphereShape3D_ikxu5")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 64
+one_shot = true
+explosiveness = 0.78
+process_material = SubResource("ParticleProcessMaterial_ngpg6")
+draw_pass_1 = SubResource("QuadMesh_5db4x")
+
+[node name="ExplosionTime" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="ExpRadius" to="." method="_on_exp_radius_body_entered"]
+[connection signal="timeout" from="ExplosionTime" to="." method="_on_explosion_time_timeout"]

@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bn0h7rm4y7nwt"]
+
+[ext_resource type="Script" path="res://Scenes/Placeholders/CannonBullet.gd" id="1_x3bru"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqof8"]
+transparency = 1
+blend_mode = 3
+albedo_color = Color(1, 0.160784, 0.172549, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_y43ku"]
+material = SubResource("StandardMaterial3D_rqof8")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_16p7g"]
+radius = 0.169625
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8ykxc"]
+
+[node name="RigidBody3D" type="RigidBody3D" groups=["EnemyBullet"]]
+collision_layer = 2
+collision_mask = 2
+collision_priority = 2.0
+gravity_scale = 0.0
+script = ExtResource("1_x3bru")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_y43ku")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 0, 0, 1)
+light_energy = 2.676
+omni_range = 0.274077
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_16p7g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_8ykxc")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

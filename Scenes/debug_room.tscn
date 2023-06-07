@@ -1,0 +1,120 @@
+[gd_scene load_steps=9 format=3 uid="uid://ddkige5jxwkhw"]
+
+[ext_resource type="Material" uid="uid://d354dwe70edao" path="res://Assets/Materials/PH_Orange_Mat.tres" id="1_e1biu"]
+[ext_resource type="PackedScene" uid="uid://dtuqyjahx4fyo" path="res://Scenes/Entities/PlayerCharacter.tscn" id="2_3ybii"]
+[ext_resource type="PackedScene" uid="uid://b4jrx8w57p2qa" path="res://Scenes/Entities/EnemyBase.tscn" id="3_ryugt"]
+[ext_resource type="PackedScene" uid="uid://i0ch3ojpwod5" path="res://Scenes/StageHazardBase.tscn" id="4_2a5cn"]
+[ext_resource type="PackedScene" uid="uid://b5pve3fodxkvm" path="res://Scenes/Placeholders/Cannon.tscn" id="5_8kgw5"]
+[ext_resource type="PackedScene" uid="uid://b4gode6wok4jr" path="res://Scenes/v1.tscn" id="6_5r7uw"]
+
+[sub_resource type="Environment" id="Environment_p4xna"]
+background_color = Color(0.760784, 0.843137, 1, 1)
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.93
+ambient_light_energy = 7.04
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_sl1xs"]
+
+[node name="DebugRoom" type="Node3D"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+size = Vector3(739.274, 2, 1030)
+material = ExtResource("1_e1biu")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -86)
+size = Vector3(16, 1.72468, 130.751)
+material = ExtResource("1_e1biu")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 3, -13)
+size = Vector3(16, 18, 1)
+material = ExtResource("1_e1biu")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 9, -44)
+size = Vector3(4, 6, 1)
+material = ExtResource("1_e1biu")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 6.80312, -172.469)
+material_override = ExtResource("1_e1biu")
+size = Vector3(16, 1, 16)
+material = ExtResource("1_e1biu")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 10.8031, -196.469)
+size = Vector3(16, 1, 16)
+material = ExtResource("1_e1biu")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 12.8031, -221.469)
+size = Vector3(16, 1, 16)
+material = ExtResource("1_e1biu")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.4417, 12.8031, -382.469)
+size = Vector3(16, 1, 16)
+material = ExtResource("1_e1biu")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 4, 12.8031, -250.469)
+size = Vector3(16, 1, 16)
+material = ExtResource("1_e1biu")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 4, 12.8031, -302.469)
+size = Vector3(16, 1, 16)
+material = ExtResource("1_e1biu")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 4, 12.8031, -365.469)
+size = Vector3(16, 1, 16)
+material = ExtResource("1_e1biu")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-0.707107, 0.707107, -8.74228e-08, 0.707107, 0.707107, 0, 6.18172e-08, -6.18172e-08, -1, -8, 12.8031, -275.469)
+size = Vector3(16, 1, 16)
+material = ExtResource("1_e1biu")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-0.61259, 0.790401, -8.6729e-08, 0.790401, 0.61259, 1.09918e-08, 6.18172e-08, -6.18172e-08, -1, -8, 12.8031, -332.469)
+size = Vector3(16, 1, 16)
+material = ExtResource("1_e1biu")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("2_3ybii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0730057, -0.108768, 0.34647)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p4xna")
+camera_attributes = SubResource("CameraAttributesPractical_sl1xs")
+
+[node name="EnemyBase" parent="." instance=ExtResource("3_ryugt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.53974, 0, 4.11979)
+
+[node name="EnemyBase2" parent="." instance=ExtResource("3_ryugt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.6507, 13.3519, -380.85)
+
+[node name="StageHazardBase" parent="." instance=ExtResource("4_2a5cn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5518, 7.68974, -22.3721)
+
+[node name="StaticBody3D" parent="." instance=ExtResource("5_8kgw5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, -31)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 75.9483, 0)
+light_energy = 16.0
+light_indirect_energy = 16.0
+light_volumetric_fog_energy = 16.0
+light_size = 1.0
+light_specular = 0.0
+omni_range = 875.019
+
+[node name="RigidBody3D" parent="." instance=ExtResource("6_5r7uw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.91316, -10.4999)
+mass = 0.18

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://i0ch3ojpwod5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_unndd"]
+transparency = 1
+albedo_color = Color(1, 0.25098, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vapga"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vl0cq"]
+size = Vector3(2, 2, 2)
+
+[node name="StageHazardBase" type="StaticBody3D" groups=["StageHazard"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.057, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_unndd")
+mesh = SubResource("BoxMesh_vapga")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_vl0cq")

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5pve3fodxkvm"]
+
+[ext_resource type="Script" path="res://Scripts/PHCannon.gd" id="1_qkeyi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ur01v"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x3537"]
+material = SubResource("StandardMaterial3D_ur01v")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_408dx"]
+size = Vector3(1, 1.95142, 0.888119)
+
+[node name="StaticBody3D" type="StaticBody3D"]
+script = ExtResource("1_qkeyi")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.00184, 0, 0, 0, 1.9636, 0, 0, 0, 1.00184, 0, 1, 0)
+mesh = SubResource("BoxMesh_x3537")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.007182)
+shape = SubResource("BoxShape3D_408dx")
+
+[node name="Aimer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+
+[node name="ShootTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
